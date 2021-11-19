@@ -1,10 +1,10 @@
 <?php
 /**
- * @package Salle-dispo
+ * @package plan
  * @version 1.0.0
  */
 /*
-Plugin Name: Salle Dispo
+Plugin Name: Gestion planning
 Description: Plugin développé afin de gérer les planning horaires d'ouvertures de la salle.
 Author: Clément Gaudinière
 Version: 1.0.0
