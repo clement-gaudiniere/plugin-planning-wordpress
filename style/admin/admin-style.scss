@@ -1,0 +1,86 @@
+/*
+  STYLE.SCSS
+  Fichier de feuille de style en cascade Scss.
+  A lancer avec la commande : npm run sass
+
+    ░▄▀▀░█▒ ▒██▀░█▄▒▄█░█▒ ░▀▄▀▒▄▀▄
+    ░▀▄▄▒█▄▄░█▄▄░█▒▀▒█▒█▄▄░▒█▒░█▀█▒░
+
+  Copyright (c) 2021 Copyright Holder All Rights Reserved.
+*/
+
+// Variables
+$mainColor: #2271b1;
+$tabelauBorderSize: 2px;
+
+*{
+  box-sizing: border-box;
+}
+body{
+
+}
+
+section{
+  font-size: 1rem;
+}
+
+.part{
+  display: block;
+  margin: auto;
+  width: 900px;
+  max-width: 95%;
+  .toolbar{
+    margin: 10px 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-end;
+    align-items: center;
+    button{
+      margin: 0 5px;
+    }
+  }
+}
+
+table{
+  border-collapse: collapse;
+  width: 100%;
+  tr{
+    border: $tabelauBorderSize solid $mainColor;
+    th{
+      border: $tabelauBorderSize solid $mainColor;
+      padding: 0.4rem;
+      width: 7em;
+    }
+    td{
+      border: $tabelauBorderSize solid $mainColor;
+      text-align: center;
+      padding: .4rem;
+    }
+    .comment{
+      margin: 0;
+      padding: 0;
+      textarea, .textarea{
+        width: 100%;
+        min-height: 4rem;
+        background: white;
+        resize: vertical;
+        border: 0;
+        outline: none;
+        -moz-tab-size: 4;
+        box-sizing: border-box;
+      }
+    }
+  }
+}
+
+input{
+  &[type="time"]{
+    background: white;
+  }
+}
+
+#ajouterPlanning{
+  cursor: pointer;
+}

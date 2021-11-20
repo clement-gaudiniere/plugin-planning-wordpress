@@ -4,7 +4,7 @@
   "description": "Feuille de style du plugin",
   "main": "index.js",
   "scripts": {
-    "sass": "sass --watch style.scss:style.css --style compressed"
+    "sass": "sass --watch admin-style.scss:admin-style.css --style compressed"
   },
   "author": "Clément Gaudinière",
   "license": "ISC"
