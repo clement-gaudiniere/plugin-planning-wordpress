@@ -1,78 +1,95 @@
+<?php
+  // On ajoute le fichier css à la page admin
+  function admin_style() {
+    wp_enqueue_style('plan-admin-style', '/wp-content/plugins/plan/style/admin/admin-style.css');
+  }
+  add_action('admin_enqueue_scripts', 'admin_style');
+  /*
+    POUR COMPRENDRE LE NOM DES INPUTS :
+      [type]-[tableau]-[jour]-[debut/fin]
+    AINSI POUR UN INPUT DE TYPE "time" DU TABLEAU 1 DE LA COLONNE DU LUNDI QUI MARQUE LE DEBUT DE L'HORAIRE :
+      time-1-lundi-debut
+  */
+  global $wpdb;
+
+  // On cherche les tableaux qui existent
+  $planningTableaux = $wpdb->query('SELECT * FROM planning_tableaux');
+  // $count = $planningTableaux->rowCount();
+  // echo "<script>alert('".$count."')</script>";
+
+  $nbrTab = 0;
+  echo "<script>let nbrTab = 0;</script>";
+ ?>
 <section>
   <div class="part">
-    <h3>Crénaux adultes loisirs</h3>
-    <table>
-      <tr>
-        <th>Mercredi</th>
-        <th>Jeudi</th>
-        <th>Vendredi</th>
-        <th>Dimanche</th>
-      </tr>
-      <tr>
-        <td>
-          <input type="time" id="crenauxAdultesLoisirsMercredi" name="" value="20:30" required>
-          <span>-</span>
-          <input type="time" id="crenauxAdultesLoisirsMercredi" name="" value="22:00" required>
-        </td>
-        <td>
-          <input type="time" id="crenauxAdultesLoisirsJeudi" name="" value="20:30" required>
-          <span>-</span>
-          <input type="time" id="crenauxAdultesLoisirsJeudi" name="" value="22:00" required>
-        </td>
-        <td>
-          <input type="time" id="crenauxAdultesLoisirsVendredi" name="" value="20:30" required>
-          <span>-</span>
-          <input type="time" id="crenauxAdultesLoisirsVendredi" name="" value="22:00" required>
-        </td>
-        <td>
-          <input type="time" id="crenauxAdultesLoisirsDimanche" name="" value="09:00" required>
-          <span>-</span>
-          <input type="time" id="crenauxAdultesLoisirsDimanche" name="" value="12:00" required>
-        </td>
-      </tr>
-      <tr>
-        <td class="comment"><textarea placeholder="Commentaire..."></textarea></td>
-        <td class="comment"><textarea placeholder="Commentaire..."></textarea></td>
-        <td class="comment"><textarea placeholder="Commentaire..."></textarea></td>
-        <td class="comment"><textarea placeholder="Commentaire..."></textarea></td>
-      </tr>
-    </table>
-    <div class="toolbar">
-      <button type="button" name="button">Ajouter une exception</button>
-      <button type="button" name="button">Enregistrer</button>
-    </div>
-  </div>
-  <div class="part">
-    <h3>Crénaux habituels pour les adultes confirmés</h3>
-    <table>
-      <tr>
-        <th>Lundi</th>
-        <th>Mardi</th>
-        <th>Mercredi</th>
-        <th>Jeudi</th>
-        <th>Vendredi</th>
-        <th>Samedi</th>
-        <th>Dimanche</th>
-      </tr>
-      <tr>
-        <td>19H30 - 21H</td>
-        <td>Maria Anders</td>
-        <td>Germany</td>
-        <td>Alfreds Futterkiste</td>
-        <td>Maria Anders</td>
-        <td>Germany</td>
-        <td>Germany</td>
-      </tr>
-      <tr>
-        <td>Alfreds Futterkiste</td>
-        <td>Maria Anders</td>
-        <td>Germany</td>
-        <td>Alfreds Futterkiste</td>
-        <td>Maria Anders</td>
-        <td>Germany</td>
-        <td>Germany</td>
-      </tr>
-    </table>
+    <form method="post">
+      <?php
+        $nbrTab += 1;
+        echo "<script>let nbrTab += 1;</script>";
+       ?>
+      <input type="text" name="title-<?= $nbrTab ?>" id="title-<?= $nbrTab ?>" value="Crénaux adultes loisirs" placeholder="Titre du tableau">
+      <table>
+        <tr>
+          <th>Lundi</th>
+          <th>Mardi</th>
+          <th>Mercredi</th>
+          <th>Jeudi</th>
+          <th>Vendredi</th>
+          <th>Samedi</th>
+          <th>Dimanche</th>
+        </tr>
+        <tr>
+          <td>
+            <input type="time" id="time-<?= $nbrTab ?>-lundi-debut" name="time-<?= $nbrTab ?>-lundi-debut" value="">
+            <span>à</span>
+            <input type="time" id="time-<?= $nbrTab ?>-lundi-fin" name="time-<?= $nbrTab ?>-lundi-fin" value="">
+          </td>
+          <td>
+            <input type="time" id="time-<?= $nbrTab ?>-mardi-debut" name="time-<?= $nbrTab ?>-mardi-debut" value="">
+            <span>à</span>
+            <input type="time" id="time-<?= $nbrTab ?>-mardi-fin" name="time-<?= $nbrTab ?>-mardi-fin" value="">
+          </td>
+          <td>
+            <input type="time" id="time-<?= $nbrTab ?>-mercredi-debut" name="time-<?= $nbrTab ?>-mercredi-debut" value="20:30">
+            <span>à</span>
+            <input type="time" id="time-<?= $nbrTab ?>-mercredi-fin" name="time-<?= $nbrTab ?>-mercredi-fin" value="22:00">
+          </td>
+          <td>
+            <input type="time" id="time-<?= $nbrTab ?>-jeudi-debut" name="time-<?= $nbrTab ?>-jeudi-debut" value="20:30">
+            <span>à</span>
+            <input type="time" id="time-<?= $nbrTab ?>-jeudi-fin" name="time-<?= $nbrTab ?>-jeudi-fin" value="22:00">
+          </td>
+          <td>
+            <input type="time" id="time-<?= $nbrTab ?>-vendredi-debut" name="time-<?= $nbrTab ?>-vendredi-debut" value="20:30">
+            <span>à</span>
+            <input type="time" id="time-<?= $nbrTab ?>-vendredi-fin" name="time-<?= $nbrTab ?>-vendredi-fin" value="22:00">
+          </td>
+          <td>
+            <input type="time" id="time-<?= $nbrTab ?>-samedi-debut" name="time-<?= $nbrTab ?>-samedi-debut" value="">
+            <span>à</span>
+            <input type="time" id="time-<?= $nbrTab ?>-samedi-fin" name="time-<?= $nbrTab ?>-samedi-fin" value="">
+          </td>
+          <td>
+            <input type="time" id="time-<?= $nbrTab ?>-dimanche-debut" name="time-<?= $nbrTab ?>-dimanche-debut" value="09:00">
+            <span>à</span>
+            <input type="time" id="time-<?= $nbrTab ?>-dimanche-fin" name="time-<?= $nbrTab ?>-dimanche-fin" value="12:00">
+          </td>
+        </tr>
+        <tr>
+          <td class="comment"><textarea placeholder="Commentaire..."></textarea></td>
+          <td class="comment"><textarea placeholder="Commentaire..."></textarea></td>
+          <td class="comment"><textarea placeholder="Commentaire..."></textarea></td>
+          <td class="comment"><textarea placeholder="Commentaire..."></textarea></td>
+          <td class="comment"><textarea placeholder="Commentaire..."></textarea></td>
+          <td class="comment"><textarea placeholder="Commentaire..."></textarea></td>
+          <td class="comment"><textarea placeholder="Commentaire..."></textarea></td>
+        </tr>
+      </table>
+      <div class="toolbar">
+        <button type="button" name="addException" class="btn btn-scd">Ajouter une exception</button>
+        <button type="button" name="save" class="btn btn-main">Enregistrer</button>
+      </div>
+    </form>
   </div>
 
   <div class="part">
@@ -87,9 +104,12 @@
     </div>
   </div>
 
-<script type="text/javascript">
-jQuery(function( $ ) {
-  // $('body').css('background','red');
-});
-</script>
+  <script type="text/javascript">
+    jQuery(function($) {
+      $('#ajouterPlanning').click(function(){
+        alert(nbrTab);
+      });
+      // $('body').css('background','red');
+    });
+  </script>
 </section>

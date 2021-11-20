@@ -11,6 +11,7 @@
 
 // Variables
 $mainColor: #2271b1;
+$contrastColor: white;
 $tabelauBorderSize: 2px;
 
 *{
@@ -29,6 +30,18 @@ section{
   margin: auto;
   width: 900px;
   max-width: 95%;
+  input{
+    &[type="text"]{
+      margin: 15px 0;
+      font-size: 1.2rem;
+      border: 1px solid transparent;
+      width: 100%;
+      background: transparent;
+      &:hover{
+        border: 1px solid #cbcbcb;
+      }
+    }
+  }
   .toolbar{
     margin: 10px 0;
     display: flex;
@@ -57,6 +70,10 @@ table{
       border: $tabelauBorderSize solid $mainColor;
       text-align: center;
       padding: .4rem;
+      span{
+        display: block;
+        padding: 5px;
+      }
     }
     .comment{
       margin: 0;
@@ -82,5 +99,23 @@ input{
 }
 
 #ajouterPlanning{
+  user-select: none;
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  margin: 50px auto;
+  padding: 12px;
+  background: $mainColor;
+  color: $contrastColor;
+  width: fit-content;
+  border-radius: 15px;
+  border: 1px solid $contrastColor;
+  svg{
+    margin: 0 15px 0 0;
+    fill: $contrastColor;
+  }
 }

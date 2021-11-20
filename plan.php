@@ -11,12 +11,6 @@ Version: 1.0.0
 Author URI: https://github.com/clement-gaudiniere
 */
 
-// On ajoute le fichier css à la page admin
-function admin_style() {
-  wp_enqueue_style('plan-admin-style', '/wp-content/plugins/plan/style/admin/admin-style.css');
-}
-add_action('admin_enqueue_scripts', 'admin_style');
-
 add_action('wp_footer','say_hello');
 add_action('admin_menu', 'modifMenu');
 add_action('admin_menu', function () {
