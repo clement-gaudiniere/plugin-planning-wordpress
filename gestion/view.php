@@ -10,7 +10,6 @@
   // On cherche les tableaux qui existent
   $planningTableaux = $wpdb->get_results('SELECT * FROM planning_tableaux');
   $nbrTab = 0;
-  echo "<script>let nbrTab = 0;</script>";
  ?>
 <section class="main" id="mainSectionTableaux">
   <?php
@@ -19,7 +18,7 @@
     ?>
     <div class="part">
       <form method="post">
-        <?php  $nbrTab += 1; echo "<script>let nbrTab += 1;</script>"; ?>
+        <?php  $nbrTab += 1; ?>
         <input type="text" name="title-<?= $nbrTab ?>" id="title-<?= $nbrTab ?>" value="<?= $planningTableauxIncrement->name ?>" placeholder="Titre du tableau">
         <table class="table-plan">
           <tr>
@@ -153,13 +152,22 @@
     $('.saveTable').click(function(){
       let idButtonSave = $(this).attr("id");
       let idTable = idButtonSave.substring(4, 5);
-      alert(idTable);
+      $.ajax({
+        url : '',
+        type : 'POST',
+        data : 'msj=true&title=' + $('#title-'+idTable).val(),
+        dataType : 'html',
+        success : function(code_html, statut){
+
+        }
+      });
     });
     // $('#mainSectionTableaux').load('/Wordpress/wp-content/plugins/plan/gestion/chargement-tableaux.php');
   });
   </script>
 
   <script type="text/javascript">
+    let nbrTab = <?= $nbrTab ?>;
     jQuery(function($) {
       $('#ajouterPlanning').click(function(){
         alert(nbrTab);
