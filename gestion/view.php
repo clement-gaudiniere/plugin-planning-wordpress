@@ -155,7 +155,7 @@
       $.ajax({
         url : '',
         type : 'POST',
-        data : 'msj=true&title=' + $('#title-'+idTable).val(),
+        data : 'msj=true&idTable='+idTable+'&title=' + $('#title-'+idTable).val(),
         dataType : 'html',
         success : function(code_html, statut){
 
