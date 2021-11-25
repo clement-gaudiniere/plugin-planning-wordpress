@@ -1,9 +1,4 @@
 <?php
-  // On ajoute le fichier css à la page admin
-  function admin_style() {
-    wp_enqueue_style('plan-admin-style', '/wp-content/plugins/plan/style/admin/admin-style.css');
-  }
-  add_action('admin_enqueue_scripts', 'admin_style');
   /*
     POUR COMPRENDRE LE NOM DES INPUTS :
       [type]-[tableau]-[jour]-[debut/fin]
@@ -13,22 +8,71 @@
   global $wpdb;
 
   // On cherche les tableaux qui existent
-  $planningTableaux = $wpdb->query('SELECT * FROM planning_tableaux');
-  // $count = $planningTableaux->rowCount();
-  // echo "<script>alert('".$count."')</script>";
-
+  $planningTableaux = $wpdb->get_results('SELECT * FROM planning_tableaux');
   $nbrTab = 0;
   echo "<script>let nbrTab = 0;</script>";
  ?>
-<section>
-  <div class="part">
+<section class="main" id="mainSectionTableaux">
+  <?php
+  // On affiche chaque tableaux avec ses horaires
+  foreach($planningTableaux as $planningTableauxIncrement) {
+    ?>
+    <div class="part">
+      <form method="post">
+        <?php  $nbrTab += 1; echo "<script>let nbrTab += 1;</script>"; ?>
+        <input type="text" name="title-<?= $nbrTab ?>" id="title-<?= $nbrTab ?>" value="<?= $planningTableauxIncrement->name ?>" placeholder="Titre du tableau">
+        <table class="table-plan">
+          <tr>
+            <th>Lundi</th>
+            <th>Mardi</th>
+            <th>Mercredi</th>
+            <th>Jeudi</th>
+            <th>Vendredi</th>
+            <th>Samedi</th>
+            <th>Dimanche</th>
+          </tr>
+          <tr>
+            <?php
+            $planningHoraires = $wpdb->get_results('SELECT * FROM planning_horaires WHERE idTableau = '.$planningTableauxIncrement->id.' ORDER BY jour');
+            foreach($planningHoraires as $planningHorairesIncrement) {
+              ?>
+              <td>
+                <input type="time" id="time-<?= $nbrTab ?>-lundi-debut" name="time-<?= $nbrTab ?>-lundi-debut" value="">
+                <span>à</span>
+                <input type="time" id="time-<?= $nbrTab ?>-lundi-fin" name="time-<?= $nbrTab ?>-lundi-fin" value="">
+              </td>
+              <?php
+            }
+             ?>
+          </tr>
+          <tr>
+            <?php
+            foreach($planningHoraires as $planningHorairesIncrement) {
+              ?>
+              <td class="comment"><textarea placeholder="Commentaire..."><?= $planningHorairesIncrement->commentaire ?></textarea></td>
+              <?php
+            }
+             ?>
+          </tr>
+        </table>
+        <div class="toolbar">
+          <button type="button" name="addException" class="btn btn-scd">Ajouter une exception</button>
+          <button type="button" name="save" class="btn btn-main saveTable" id="save<?= $nbrTab ?>">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+    <?php
+  }
+ ?>
+
+  <!-- <div class="part">
     <form method="post">
       <?php
-        $nbrTab += 1;
-        echo "<script>let nbrTab += 1;</script>";
+        // $nbrTab += 1;
+        // echo "<script>let nbrTab += 1;</script>";
        ?>
       <input type="text" name="title-<?= $nbrTab ?>" id="title-<?= $nbrTab ?>" value="Crénaux adultes loisirs" placeholder="Titre du tableau">
-      <table>
+      <table class="table-plan">
         <tr>
           <th>Lundi</th>
           <th>Mardi</th>
@@ -90,7 +134,7 @@
         <button type="button" name="save" class="btn btn-main">Enregistrer</button>
       </div>
     </form>
-  </div>
+  </div> -->
 
   <div class="part">
     <div id="ajouterPlanning">
@@ -103,6 +147,17 @@
       Ajouter un planning horaires
     </div>
   </div>
+
+  <script type="text/javascript">
+  jQuery(function($) {
+    $('.saveTable').click(function(){
+      let idButtonSave = $(this).attr("id");
+      let idTable = idButtonSave.substring(4, 5);
+      alert(idTable);
+    });
+    // $('#mainSectionTableaux').load('/Wordpress/wp-content/plugins/plan/gestion/chargement-tableaux.php');
+  });
+  </script>
 
   <script type="text/javascript">
     jQuery(function($) {
