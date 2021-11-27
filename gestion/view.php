@@ -7,6 +7,9 @@
   */
   global $wpdb;
 
+  // On créer une liste des jours de la semaine
+  $joursSemaine = ['lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche'];
+
   // On cherche les tableaux qui existent
   $planningTableaux = $wpdb->get_results('SELECT * FROM planning_tableaux');
   $nbrTab = 0;
@@ -33,23 +36,27 @@
           <tr>
             <?php
             $planningHoraires = $wpdb->get_results('SELECT * FROM planning_horaires WHERE idTableau = '.$planningTableauxIncrement->id.' ORDER BY jour');
+            $i = 0;
             foreach($planningHoraires as $planningHorairesIncrement) {
               ?>
               <td>
-                <input type="time" id="time-<?= $nbrTab ?>-lundi-debut" name="time-<?= $nbrTab ?>-lundi-debut" value="">
+                <input type="time" id="time-<?= $nbrTab ?>-<?= $joursSemaine[$i] ?>-debut" name="time-<?= $nbrTab ?>-lundi-debut" value="">
                 <span>à</span>
-                <input type="time" id="time-<?= $nbrTab ?>-lundi-fin" name="time-<?= $nbrTab ?>-lundi-fin" value="">
+                <input type="time" id="time-<?= $nbrTab ?>-<?= $joursSemaine[$i] ?>-fin" name="time-<?= $nbrTab ?>-lundi-fin" value="">
               </td>
               <?php
+              $i += 1;
             }
              ?>
           </tr>
           <tr>
             <?php
+            $i = 0;
             foreach($planningHoraires as $planningHorairesIncrement) {
               ?>
-              <td class="comment"><textarea placeholder="Commentaire..."><?= $planningHorairesIncrement->commentaire ?></textarea></td>
+              <td class="comment"><textarea placeholder="Commentaire..." id="comment-<?= $nbrTab ?>-<?= $joursSemaine[$i] ?>"><?= $planningHorairesIncrement->commentaire ?></textarea></td>
               <?php
+              $i += 1;
             }
              ?>
           </tr>
@@ -152,13 +159,13 @@
     $('.saveTable').click(function(){
       let idButtonSave = $(this).attr("id");
       let idTable = idButtonSave.substring(4, 5);
+      let data = '?msj=true&idTable='+idTable+'&title=' + $('#title-'+idTable).val() + '&time-lundi-debut=' + $('#time-'+idTable+'-lundi-debut').val() + '&time-lundi-fin=' + $('#time-'+idTable+'-lundi-fin').val() + '&time-mardi-debut=' + $('#time-'+idTable+'-mardi-debut').val() + '&time-mardi-fin=' + $('#time-'+idTable+'-mardi-fin').val()  + '&time-mercredi-debut=' + $('#time-'+idTable+'-mercredi-debut').val() + '&time-mercredi-fin=' + $('#time-'+idTable+'-mercredi-fin').val()  + '&time-jeudi-debut=' + $('#time-'+idTable+'-jeudi-debut').val() + '&time-jeudi-fin=' + $('#time-'+idTable+'-jeudi-fin').val()  + '&time-vendredi-debut=' + $('#time-'+idTable+'-vendredi-debut').val() + '&time-vendredi-fin=' + $('#time-'+idTable+'-vendredi-fin').val() + '&time-samedi-debut=' + $('#time-'+idTable+'-samedi-debut').val() + '&time-samedi-fin=' + $('#time-'+idTable+'-samedi-fin').val() + '&time-dimanche-debut=' + $('#time-'+idTable+'-dimanche-debut').val() + '&time-dimanche-fin=' + $('#time-'+idTable+'-dimanche-fin').val() + "&comment-lundi=" + $('#comment-'+idTable+'-lundi').val() + "&comment-mardi=" + $('#comment-'+idTable+'-mardi').val() + "&comment-mercredi=" + $('#comment-'+idTable+'-mercredi').val() + "&comment-jeudi=" + $('#comment-'+idTable+'-jeudi').val() + "&comment-vendredi=" + $('#comment-'+idTable+'-vendredi').val() + "&comment-samedi=" + $('#comment-'+idTable+'-samedi').val() + "&comment-dimanche=" + $('#comment-'+idTable+'-dimanche').val();
       $.ajax({
-        url : '',
+        url : '/Wordpress/wp-content/plugins/plan/gestion/modification-tableaux.php'+data,
         type : 'POST',
-        data : 'msj=true&idTable='+idTable+'&title=' + $('#title-'+idTable).val(),
         dataType : 'html',
         success : function(code_html, statut){
-
+          console.log(code_html);
         }
       });
     });

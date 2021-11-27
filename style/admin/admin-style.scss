@@ -11,6 +11,7 @@
 
 // Variables
 $mainColor: #2271b1;
+$secondColor: #a1a1a1;
 $contrastColor: white;
 $tabelauBorderSize: 2px;
 
@@ -60,14 +61,14 @@ body{
   border-collapse: collapse;
   width: 100%;
   tr{
-    border: $tabelauBorderSize solid $mainColor;
+    border: $tabelauBorderSize solid $secondColor;
     th{
-      border: $tabelauBorderSize solid $mainColor;
+      // border: $tabelauBorderSize solid $secondColor;
       padding: 0.4rem;
       width: 7em;
     }
     td{
-      border: $tabelauBorderSize solid $mainColor;
+      // border: $tabelauBorderSize solid $secondColor;
       text-align: center;
       padding: .4rem;
       span{
@@ -81,12 +82,18 @@ body{
       textarea, .textarea{
         width: 100%;
         min-height: 4rem;
-        background: white;
-        resize: vertical;
+        background: transparent;
         border: 0;
+        resize: vertical;
+        border-radius: 0;
         outline: none;
         -moz-tab-size: 4;
         box-sizing: border-box;
+        border-right: 1px solid $secondColor;
+        &:focus{
+          border: 0 !important;
+          border-right: 1px solid $secondColor !important;
+        }
       }
     }
   }
@@ -94,7 +101,9 @@ body{
 
 input{
   &[type="time"]{
-    background: white;
+    background: transparent;
+    border: 1px solid #d5d5d5;
+    cursor: pointer;
   }
 }
 
