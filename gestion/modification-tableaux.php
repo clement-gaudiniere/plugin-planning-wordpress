@@ -26,14 +26,17 @@
               [htmlspecialchars($_GET['time-dimanche-debut']),htmlspecialchars($_GET['time-dimanche-fin'])]
             ];
 
+            $commentJours = [htmlspecialchars($_GET['comment-lundi']), htmlspecialchars($_GET['comment-mardi']), htmlspecialchars($_GET['comment-mercredi']), htmlspecialchars($_GET['comment-jeudi']), htmlspecialchars($_GET['comment-vendredi']), htmlspecialchars($_GET['comment-samedi']), htmlspecialchars($_GET['comment-dimanche'])];
+
             // On met à jour le titre
             $newNameQuery = $wpdb->query($wpdb->prepare("UPDATE planning_tableaux SET name=%s WHERE id=%d", array($titre, $idTable)));
 
-            // On met à jour les horaires
+            // On met à jour les horaires et on ajoute les commentaires
             for ($i = 1; $i < 8; $i++) {
-              $newTimetableQuery = $wpdb->query($wpdb->prepare("UPDATE planning_horaires SET horaireDebut=%s, horaireFin=%s WHERE idTableau=%d AND jour=%d", array($timeJours[$i-1][0], $timeJours[$i-1][1], $idTable, $i)));
+              $newTimetableQuery = $wpdb->query($wpdb->prepare("UPDATE planning_horaires SET horaireDebut=%s, horaireFin=%s, commentaire=%s WHERE idTableau=%d AND jour=%d", array($timeJours[$i-1][0], $timeJours[$i-1][1], $commentJours[$i-1], $idTable, $i)));
             }
 
+            echo "Tableau mis à jour avec succès !";
           } else {
             $error = "Certains champs requis n'existent pas : les commentaires";
           }
