@@ -71,6 +71,8 @@
   }
  ?>
 
+ <div class="part nextTable"></div>
+
   <div class="part">
     <div id="ajouterPlanning" class="btn btn-main">
       <svg xmlns="http://www.w3.org/2000/svg" width="25px" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 489.8 489.8" style="enable-background:new 0 0 489.8 489.8;" xml:space="preserve">
@@ -85,18 +87,25 @@
 
   <script type="text/javascript">
   jQuery(function($) {
-    $('.saveTable').click(function(){
+    $('.saveTable').click(function(e){
+      e.preventDefault();
       let idButtonSave = $(this).attr("id");
       let idTable = idButtonSave.substring(4, 5);
       let data = '?msj=true&idTable='+idTable+'&title=' + $('#title-'+idTable).val() + '&time-lundi-debut=' + $('#time-'+idTable+'-lundi-debut').val() + '&time-lundi-fin=' + $('#time-'+idTable+'-lundi-fin').val() + '&time-mardi-debut=' + $('#time-'+idTable+'-mardi-debut').val() + '&time-mardi-fin=' + $('#time-'+idTable+'-mardi-fin').val()  + '&time-mercredi-debut=' + $('#time-'+idTable+'-mercredi-debut').val() + '&time-mercredi-fin=' + $('#time-'+idTable+'-mercredi-fin').val()  + '&time-jeudi-debut=' + $('#time-'+idTable+'-jeudi-debut').val() + '&time-jeudi-fin=' + $('#time-'+idTable+'-jeudi-fin').val()  + '&time-vendredi-debut=' + $('#time-'+idTable+'-vendredi-debut').val() + '&time-vendredi-fin=' + $('#time-'+idTable+'-vendredi-fin').val() + '&time-samedi-debut=' + $('#time-'+idTable+'-samedi-debut').val() + '&time-samedi-fin=' + $('#time-'+idTable+'-samedi-fin').val() + '&time-dimanche-debut=' + $('#time-'+idTable+'-dimanche-debut').val() + '&time-dimanche-fin=' + $('#time-'+idTable+'-dimanche-fin').val() + "&comment-lundi=" + $('#comment-'+idTable+'-lundi').val() + "&comment-mardi=" + $('#comment-'+idTable+'-mardi').val() + "&comment-mercredi=" + $('#comment-'+idTable+'-mercredi').val() + "&comment-jeudi=" + $('#comment-'+idTable+'-jeudi').val() + "&comment-vendredi=" + $('#comment-'+idTable+'-vendredi').val() + "&comment-samedi=" + $('#comment-'+idTable+'-samedi').val() + "&comment-dimanche=" + $('#comment-'+idTable+'-dimanche').val();
-      $('#chargement').css('display','inline');
+      $('#loadingWindow > div:last').after('<div class="chargement" id="chargement'+idTable+'"><div class="components-load" id="componentsLoad'+idTable+'"><div class="lds-ripple"><div></div><div></div></div><span>Chargement...</span></div><div class="components-complete" id="componentsComplete'+idTable+'"><div class="lds-ripple"><div></div><div></div></div><span>Succès !</span></div></div>');
+      // $('#loadingWindow > div:last').fadeIn(150);
       $.ajax({
         url : '/Wordpress/wp-content/plugins/plan/gestion/modification-tableaux.php'+data,
         type : 'POST',
         dataType : 'html',
         success : function(code_html, statut){
           console.log(code_html);
-          $('#chargement').css('display','none');
+          $('#componentsLoad'+idTable).css('display','none');
+          $('#componentsComplete'+idTable).css('display','flex');
+          setTimeout(function() {
+            $('#componentsComplete'+idTable).css('display','none');
+            $('#chargement'+idTable).remove();
+          }, 1000);
         }
       });
     });
@@ -105,16 +114,58 @@
 
   <script type="text/javascript">
     let nbrTab = <?= $nbrTab ?>;
+    /*let newTableContent = '<form method="post">
+      <input type="text" name="title-'+nbrTab+1+'" id="title-'+nbrTab+1+'" value="<?= $planningTableauxIncrement->name ?>" placeholder="Titre du tableau">
+      <table class="table-plan">
+        <tr>
+          <th>Lundi</th>
+          <th>Mardi</th>
+          <th>Mercredi</th>
+          <th>Jeudi</th>
+          <th>Vendredi</th>
+          <th>Samedi</th>
+          <th>Dimanche</th>
+        </tr>
+        <tr>
+          <?php
+          $planningHoraires = $wpdb->get_results('SELECT * FROM planning_horaires WHERE idTableau = '.$planningTableauxIncrement->id.' ORDER BY jour');
+          $i = 0;
+          foreach($planningHoraires as $planningHorairesIncrement) {
+            ?>
+            <td>
+              <input type="time" id="time-<?= $nbrTab ?>-<?= $joursSemaine[$i] ?>-debut" name="time-<?= $nbrTab ?>-lundi-debut" value="<?= $planningHorairesIncrement->horaireDebut ?>">
+              <span>à</span>
+              <input type="time" id="time-<?= $nbrTab ?>-<?= $joursSemaine[$i] ?>-fin" name="time-<?= $nbrTab ?>-lundi-fin" value="<?= $planningHorairesIncrement->horaireFin ?>">
+            </td>
+            <?php
+            $i += 1;
+          }
+           ?>
+        </tr>
+        <tr>
+          <?php
+          $i = 0;
+          foreach($planningHoraires as $planningHorairesIncrement) {
+            ?>
+            <td class="comment"><textarea placeholder="Commentaire..." id="comment-<?= $nbrTab ?>-<?= $joursSemaine[$i] ?>"><?= $planningHorairesIncrement->commentaire ?></textarea></td>
+            <?php
+            $i += 1;
+          }
+           ?>
+        </tr>
+      </table>
+      <div class="toolbar">
+        <button type="button" name="addException" class="btn btn-scd">Ajouter une exception</button>
+        <button type="button" name="save" class="btn btn-main saveTable" id="save<?= $nbrTab ?>">Enregistrer</button>
+      </div>
+    </form>'; */
     jQuery(function($) {
       $('#ajouterPlanning').click(function(){
-        alert(nbrTab);
+        $('.nextTable:last').html(nbrTab+1);
       });
     });
   </script>
 </section>
-<div id="chargement">
-  <div class="lds-ripple">
-    <div></div>
-    <div></div>
-  </div>
+<div id="loadingWindow">
+  <div></div>
 </div>
