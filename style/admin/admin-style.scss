@@ -72,6 +72,9 @@ body{
     &:hover{
       background: lighten($mainColor, 5%);
     }
+    &:disabled, &[disabled]{
+      opacity: 0.3;
+    }
   }
   &-scd {
     background: lighten($secondColor, 15%);
@@ -170,20 +173,19 @@ input{
   margin: 7px 0 0 0;
   width: 338px;
   max-width: 98%;
-  backdrop-filter: blur(6px);
   border-radius: $border-radius;
-  background: rgba(0,0,0,.28);
   > div{
     display: flex;
     align-items: center;
-  }
-  &-complete{
-    background: rgb(58 151 78 / 85%) !important;
+    backdrop-filter: blur(6px);
+    background: rgba(0,0,0,.28);
+    border-radius: $border-radius;
   }
   > .components-complete{
     display: none;
     background: rgb(58 151 78 / 85%) !important;
     border-radius: $border-radius;
+    transition: all .5s ease-in-out;
   }
   .lds-ripple {
     display: inline-block;
