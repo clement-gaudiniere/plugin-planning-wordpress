@@ -37,7 +37,7 @@ body{
       margin: 15px 0;
       font-size: 1.2rem;
       border: 1px solid transparent;
-      width: 100%;
+      flex: 16;
       background: transparent;
       &:hover{
         border: 1px solid #cbcbcb;
@@ -54,6 +54,18 @@ body{
     align-items: center;
     button{
       margin: 0 5px;
+    }
+  }
+  .head-table{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .trash{
+      width: 24px;
+      height: 24px;
+      fill: #df3333;
+      flex: 1;
+      cursor: pointer;
     }
   }
 }

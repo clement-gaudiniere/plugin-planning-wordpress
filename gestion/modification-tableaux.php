@@ -50,10 +50,11 @@
       } else {
         $error = "Le tableau doit avoir un id.";
       }
-    }
-    else {
+    } else {
       $error = "Il manque le queryNumber";
     }
+  } else {
+    $error = "Erreur argument [msj]";
   }
 
   if(isset($error) AND !empty($error)){
