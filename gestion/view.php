@@ -135,11 +135,12 @@
     jQuery(function($) {
       let idButtonSave = "";
       $('input').bind('input', function() {
-        idButtonSave = 'save' + $(this).attr("id").substring(5);
+        // On extrait les nombres de la str
+        idButtonSave = 'save' + $(this).attr("id").match(/\d+/g).join('');
         $('#'+idButtonSave).addClass('btn-main').removeClass('btn-scd');
       });
       $('textarea').bind('input', function() {
-        idButtonSave = 'save' + $(this).attr("id").substring(8);
+        idButtonSave = 'save' + $(this).attr("id").match(/\d+/g).join('');
         $('#'+idButtonSave).addClass('btn-main').removeClass('btn-scd');
       });
       // Ajouter pour les champs de titres
