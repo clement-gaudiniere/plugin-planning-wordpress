@@ -22,14 +22,7 @@
     <div class="part">
       <form method="post">
         <?php  $nbrTab += 1; ?>
-        <div class="head-table">
-          <input type="text" name="title-<?= $nbrTab ?>" id="title-<?= $nbrTab ?>" value="<?= $planningTableauxIncrement->name ?>" placeholder="Titre du tableau">
-          <svg xmlns="http://www.w3.org/2000/svg" id="trash-<?= $nbrTab ?>" x="0px" y="0px" viewBox="0 0 457.503 457.503" style="enable-background:new 0 0 457.503 457.503;" xml:space="preserve" class="trash">
-            <g>
-          		<path d="M381.575,57.067h-90.231C288.404,25.111,261.461,0,228.752,0C196.043,0,169.1,25.111,166.16,57.067H75.929    c-26.667,0-48.362,21.695-48.362,48.362c0,26.018,20.655,47.292,46.427,48.313v246.694c0,31.467,25.6,57.067,57.067,57.067    h195.381c31.467,0,57.067-25.6,57.067-57.067V153.741c25.772-1.02,46.427-22.294,46.427-48.313    C429.936,78.761,408.242,57.067,381.575,57.067z M165.841,376.817c0,8.013-6.496,14.509-14.508,14.509    c-8.013,0-14.508-6.496-14.508-14.509V186.113c0-8.013,6.496-14.508,14.508-14.508c8.013,0,14.508,6.496,14.508,14.508V376.817z     M243.26,376.817c0,8.013-6.496,14.509-14.508,14.509c-8.013,0-14.508-6.496-14.508-14.509V186.113    c0-8.013,6.496-14.508,14.508-14.508c8.013,0,14.508,6.496,14.508,14.508V376.817z M320.679,376.817    c0,8.013-6.496,14.509-14.508,14.509c-8.013,0-14.509-6.496-14.509-14.509V186.113c0-8.013,6.496-14.508,14.509-14.508    s14.508,6.496,14.508,14.508V376.817z"/>
-          	</g>
-          </svg>
-        </div>
+        <input type="text" name="title-<?= $nbrTab ?>" id="title-<?= $nbrTab ?>" value="<?= $planningTableauxIncrement->name ?>" placeholder="Titre du tableau">
         <table class="table-plan">
           <tr>
             <th>Lundi</th>
@@ -69,6 +62,11 @@
           </tr>
         </table>
         <div class="toolbar">
+          <svg xmlns="http://www.w3.org/2000/svg" id="trash-<?= $nbrTab ?>" x="0px" y="0px" viewBox="0 0 457.503 457.503" style="enable-background:new 0 0 457.503 457.503;" xml:space="preserve" class="trash">
+            <g>
+          		<path d="M381.575,57.067h-90.231C288.404,25.111,261.461,0,228.752,0C196.043,0,169.1,25.111,166.16,57.067H75.929    c-26.667,0-48.362,21.695-48.362,48.362c0,26.018,20.655,47.292,46.427,48.313v246.694c0,31.467,25.6,57.067,57.067,57.067    h195.381c31.467,0,57.067-25.6,57.067-57.067V153.741c25.772-1.02,46.427-22.294,46.427-48.313    C429.936,78.761,408.242,57.067,381.575,57.067z M165.841,376.817c0,8.013-6.496,14.509-14.508,14.509    c-8.013,0-14.508-6.496-14.508-14.509V186.113c0-8.013,6.496-14.508,14.508-14.508c8.013,0,14.508,6.496,14.508,14.508V376.817z     M243.26,376.817c0,8.013-6.496,14.509-14.508,14.509c-8.013,0-14.508-6.496-14.508-14.509V186.113    c0-8.013,6.496-14.508,14.508-14.508c8.013,0,14.508,6.496,14.508,14.508V376.817z M320.679,376.817    c0,8.013-6.496,14.509-14.508,14.509c-8.013,0-14.509-6.496-14.509-14.509V186.113c0-8.013,6.496-14.508,14.509-14.508    s14.508,6.496,14.508,14.508V376.817z"/>
+          	</g>
+          </svg>
           <button type="button" name="addException" class="btn btn-scd">Ajouter une exception</button>
           <button type="button" name="save" class="btn btn-scd saveTable" id="save<?= $nbrTab ?>">Enregistrer</button>
         </div>
@@ -92,14 +90,12 @@
     </div>
   </div>
 
-  <script type="text/javascript">
-    // Script de mise à jour des tableaux
+  <script> // Script de mise à jour des tableaux
     let queryNumber = 0;
     let jour = ['lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche'];
     jQuery(function($) {
       $('.saveTable').click(function(e){
         queryNumber += 1;
-        console.log();
         e.preventDefault();
         // On déclare nos variables
         let idButtonSave = $(this).attr("id");
@@ -135,25 +131,25 @@
       });
     });
   </script>
-  <script>
-    // Script du design interactif des boutons
+  <script> // Script du design interactif des boutons
     jQuery(function($) {
       let idButtonSave = "";
       $('input').bind('input', function() {
-        idButtonSave = 'save' + $(this).attr("id").substring(5, 6);
+        idButtonSave = 'save' + $(this).attr("id").substring(5);
         $('#'+idButtonSave).addClass('btn-main').removeClass('btn-scd');
       });
       $('textarea').bind('input', function() {
-        idButtonSave = 'save' + $(this).attr("id").substring(8, 9);
+        idButtonSave = 'save' + $(this).attr("id").substring(8);
         $('#'+idButtonSave).addClass('btn-main').removeClass('btn-scd');
       });
+      // Ajouter pour les champs de titres
     });
   </script>
-
-  <script type="text/javascript">
+  <script> // Script pour ajouter des tabelaux
     let nbrTab = <?= $nbrTab ?>;
     jQuery(function($) {
-      $('#ajouterPlanning').click(function(){
+      $('#ajouterPlanning').click(function(e){
+        e.preventDefault();
         let dataAddPlan = "?newTab=true&nbrTab=" + nbrTab;
         $.ajax({
           url : '/Wordpress/wp-content/plugins/plan/gestion/nouveaux-tableaux.php'+dataAddPlan,
@@ -166,7 +162,50 @@
       });
     });
   </script>
+  <script> // Script pour supprimer des tableaux
+  jQuery(function($) {
+    // On initialise nos variables
+    let idButtonTrash = 0;
+    let idTable = 0;
+    $('.trash').click(function(e){
+      e.preventDefault();
+      // On met à jour nos variables
+      idButtonTrash = $(this).attr("id");
+      idTable = idButtonTrash.substring(6);
+      $('#confirmDelete').css('display','block');
+
+      // Si l'utilisateur confirme la suppression
+      $('#deleteConfirmed').click(function(){
+        let dataDeleteTab = "?delete=true&tab="+idTable;
+        // On effectue la requête Ajax
+        $.ajax({
+          url : '/Wordpress/wp-content/plugins/plan/gestion/supprimer-tableaux.php'+dataDeleteTab,
+          type : 'POST',
+          dataType : 'html',
+          success : function(code_html, statut){
+            console.log(code_html);
+          }
+        });
+      });
+      // Si l'utilisateur refuse la suppression
+      $('#deleteCancelled').click(function(){
+        $('#confirmDelete').css('display','none');
+        idButtonTrash = 0;
+        idTable = 0;
+      });
+    });
+  });
+  </script>
 </section>
+<div id="confirmDelete">
+  <div>
+    <span>Êtes-vous sûr de vouloir supprimer ce tableau ?</span>
+    <div class="flex">
+      <button type="button" class="btn btn-danger" name="yes" id="deleteConfirmed">Oui</button>
+      <button type="button" class="btn btn-scd" name="non" id="deleteCancelled">Non</button>
+    </div>
+  </div>
+</div>
 <div id="loadingWindow">
   <div></div>
 </div>

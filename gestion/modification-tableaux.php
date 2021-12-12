@@ -15,7 +15,7 @@
 
               // On sécurise les champs
               $titre = htmlspecialchars($_GET['title']);
-              $idTable = htmlspecialchars($_GET['idTable']);
+              $idTable = htmlspecialchars(intval($_GET['idTable']));
 
               $timeJours = [
                 [htmlspecialchars($_GET['time-lundi-debut']),htmlspecialchars($_GET['time-lundi-fin'])],
