@@ -62,7 +62,7 @@
           </tr>
         </table>
         <div class="toolbar">
-          <svg xmlns="http://www.w3.org/2000/svg" id="trash-<?= $nbrTab ?>" x="0px" y="0px" viewBox="0 0 457.503 457.503" style="enable-background:new 0 0 457.503 457.503;" xml:space="preserve" class="trash">
+          <svg xmlns="http://www.w3.org/2000/svg" id="trash-<?= $planningTableauxIncrement->id ?>" x="0px" y="0px" viewBox="0 0 457.503 457.503" style="enable-background:new 0 0 457.503 457.503;" xml:space="preserve" class="trash">
             <g>
           		<path d="M381.575,57.067h-90.231C288.404,25.111,261.461,0,228.752,0C196.043,0,169.1,25.111,166.16,57.067H75.929    c-26.667,0-48.362,21.695-48.362,48.362c0,26.018,20.655,47.292,46.427,48.313v246.694c0,31.467,25.6,57.067,57.067,57.067    h195.381c31.467,0,57.067-25.6,57.067-57.067V153.741c25.772-1.02,46.427-22.294,46.427-48.313    C429.936,78.761,408.242,57.067,381.575,57.067z M165.841,376.817c0,8.013-6.496,14.509-14.508,14.509    c-8.013,0-14.508-6.496-14.508-14.509V186.113c0-8.013,6.496-14.508,14.508-14.508c8.013,0,14.508,6.496,14.508,14.508V376.817z     M243.26,376.817c0,8.013-6.496,14.509-14.508,14.509c-8.013,0-14.508-6.496-14.508-14.509V186.113    c0-8.013,6.496-14.508,14.508-14.508c8.013,0,14.508,6.496,14.508,14.508V376.817z M320.679,376.817    c0,8.013-6.496,14.509-14.508,14.509c-8.013,0-14.509-6.496-14.509-14.509V186.113c0-8.013,6.496-14.508,14.509-14.508    s14.508,6.496,14.508,14.508V376.817z"/>
           	</g>
@@ -164,38 +164,50 @@
     });
   </script>
   <script> // Script pour supprimer des tableaux
-  jQuery(function($) {
-    // On initialise nos variables
-    let idButtonTrash = 0;
-    let idTable = 0;
-    $('.trash').click(function(e){
-      e.preventDefault();
-      // On met à jour nos variables
-      idButtonTrash = $(this).attr("id");
-      idTable = idButtonTrash.substring(6);
-      $('#confirmDelete').css('display','block');
+    jQuery(function($) {
+      // On initialise nos variables
+      let idButtonTrash = 0;
+      let idTable = 0;
+      $('.trash').click(function(e){
+        e.preventDefault();
+        // On met à jour nos variables
+        idButtonTrash = $(this).attr("id");
+        idTable = idButtonTrash.substring(6);
+        console.log(idTable);
+        $('#confirmDelete').css('display','block');
 
-      // Si l'utilisateur confirme la suppression
-      $('#deleteConfirmed').click(function(){
-        let dataDeleteTab = "?delete=true&tab="+idTable;
-        // On effectue la requête Ajax
-        $.ajax({
-          url : '/Wordpress/wp-content/plugins/plan/gestion/supprimer-tableaux.php'+dataDeleteTab,
-          type : 'POST',
-          dataType : 'html',
-          success : function(code_html, statut){
-            console.log(code_html);
-          }
+        // Si l'utilisateur confirme la suppression
+        $('#deleteConfirmed').click(function(){
+          let dataDeleteTab = "?delete=true&tab="+idTable;
+          // On ajoute la popup de chargement
+          $('#loadingWindow > div:last').after('<div class="chargement" id="chargement'+idTable+'"><div class="components-load" id="componentsLoad'+idTable+'"><div class="lds-ripple"><div></div><div></div></div><span>Chargement...</span></div><div class="components-complete" id="componentsComplete'+idTable+'"><svg xmlns="http://www.w3.org/2000/svg" style="width: 50px; padding: 6px;" viewBox="0 0 48 48" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44ZM34.7415 17.6709C35.1121 17.2614 35.0805 16.629 34.6709 16.2585C34.2614 15.8879 33.629 15.9195 33.2585 16.3291L21.2809 29.5675L14.6905 23.2766C14.291 22.8953 13.658 22.91 13.2766 23.3095C12.8953 23.709 12.91 24.342 13.3095 24.7234L20.6429 31.7234L21.3858 32.4325L22.0749 31.6709L34.7415 17.6709Z" fill="#fff"/></svg><span>Succès !</span></div></div>');
+          // On effectue la requête Ajax
+          $.ajax({
+            url : '/Wordpress/wp-content/plugins/plan/gestion/supprimer-tableaux.php'+dataDeleteTab,
+            type : 'POST',
+            dataType : 'html',
+            success : function(code_html, statut){
+              console.log(code_html);
+              $('#confirmDelete').css('display','none');
+              $('#componentsLoad'+idTable).css('display','none');
+              $('#componentsComplete'+idTable).css('display','flex');
+              setTimeout(function() {
+                $('#componentsComplete'+idTable).css('transform',' translate(400px, 0)');
+                setTimeout(function() {
+                  $('#chargement'+idTable).remove();
+                }, 500);
+              }, 1000);
+            }
+          });
+        });
+        // Si l'utilisateur refuse la suppression
+        $('#deleteCancelled').click(function(){
+          $('#confirmDelete').css('display','none');
+          idButtonTrash = 0;
+          idTable = 0;
         });
       });
-      // Si l'utilisateur refuse la suppression
-      $('#deleteCancelled').click(function(){
-        $('#confirmDelete').css('display','none');
-        idButtonTrash = 0;
-        idTable = 0;
-      });
     });
-  });
   </script>
 </section>
 <div id="confirmDelete">

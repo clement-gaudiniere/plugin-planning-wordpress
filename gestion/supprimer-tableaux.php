@@ -8,12 +8,15 @@
 
       $idTab = htmlspecialchars(intval($_GET['tab']));
 
-      // On supprimer l'entrée dans la table "planning_tableau"
-      $deletePlanning = $wpdb->query('DELETE FROM `planning_tableau` WHERE id = '.$idTab);
-
-      echo "string";
+      // On supprimer l'entrée dans la table "planning_tableaux"
+      $deletePlanning = $wpdb->query('DELETE FROM `planning_tableaux` WHERE id = '.$idTab);
 
       // On supprimer les entrées dans la table "planning_horaires"
+      $deleteHoraires = $wpdb->query('DELETE FROM `planning_horaires` WHERE idTableau = '.$idTab);
+
+
+      echo "Tableau supprimé";
+      echo "\n".$idTab;
 
     } else {
       $error = "Le tableau à supprimer n'est pas précisé";
