@@ -65,8 +65,8 @@
           		<path d="M381.575,57.067h-90.231C288.404,25.111,261.461,0,228.752,0C196.043,0,169.1,25.111,166.16,57.067H75.929    c-26.667,0-48.362,21.695-48.362,48.362c0,26.018,20.655,47.292,46.427,48.313v246.694c0,31.467,25.6,57.067,57.067,57.067    h195.381c31.467,0,57.067-25.6,57.067-57.067V153.741c25.772-1.02,46.427-22.294,46.427-48.313    C429.936,78.761,408.242,57.067,381.575,57.067z M165.841,376.817c0,8.013-6.496,14.509-14.508,14.509    c-8.013,0-14.508-6.496-14.508-14.509V186.113c0-8.013,6.496-14.508,14.508-14.508c8.013,0,14.508,6.496,14.508,14.508V376.817z     M243.26,376.817c0,8.013-6.496,14.509-14.508,14.509c-8.013,0-14.508-6.496-14.508-14.509V186.113    c0-8.013,6.496-14.508,14.508-14.508c8.013,0,14.508,6.496,14.508,14.508V376.817z M320.679,376.817    c0,8.013-6.496,14.509-14.508,14.509c-8.013,0-14.509-6.496-14.509-14.509V186.113c0-8.013,6.496-14.508,14.509-14.508    s14.508,6.496,14.508,14.508V376.817z"/>
           	</g>
           </svg>
-          <button type="button" name="addException" class="btn btn-scd">Ajouter une exception</button>
-          <button type="button" name="save" class="btn btn-scd saveTable" id="save<?= $planningTableauxIncrement->id ?>">Enregistrer</button>
+          <button type="button" name="addException-<?= $planningTableauxIncrement->id ?>" class="btn btn-scd addException" id="addException-<?= $planningTableauxIncrement->id ?>">Ajouter une exception</button>
+          <button type="button" name="save" class="btn btn-scd saveTable" id="save-<?= $planningTableauxIncrement->id ?>">Enregistrer</button>
         </div>
       </form>
     </div>
@@ -93,6 +93,7 @@
   <?php include plugin_dir_path(__FILE__) . '../scripts/script.php'; ?>
 </div>
 
+<!-- Les fenêtres -->
 <div id="confirmDelete">
   <div>
     <span>Êtes-vous sûr de vouloir supprimer ce tableau ?</span>
@@ -102,6 +103,11 @@
     </div>
   </div>
 </div>
+
+<div id="popupPlan">
+
+</div>
+
 <div id="loadingWindow">
   <div class="first"></div>
 </div>

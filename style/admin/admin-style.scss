@@ -229,6 +229,17 @@ $border-radius: 6px;
   }
 }
 
+// Popup quelconque
+#popupPlan{
+  background: white;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+}
+
 // Loader chargement
 #loadingWindow{
   height: 46px;
@@ -304,4 +315,8 @@ $border-radius: 6px;
 // Le menu Wordpress
 #adminmenuback {
   z-index: 3;
+}
+// Le contenu Wordpress
+#wpcontent {
+  // padding-left: 0 !important;
 }

@@ -8,7 +8,7 @@
       e.preventDefault();
       // On déclare nos variables
       let idButtonSave = $(this).attr("id");
-      let idTable = idButtonSave.substring(4);
+      let idTable = idButtonSave.substring(5);
       // On désactive le bouton pour éviter une surcharge de requête
       $('#'+idButtonSave).prop('disabled', true);
       // On traite les données
@@ -46,11 +46,11 @@
     let idButtonSave = "";
     $('input').bind('input', function() {
       // On extrait les nombres de la str
-      idButtonSave = 'save' + $(this).attr("id").match(/\d+/g).join('');
+      idButtonSave = 'save-' + $(this).attr("id").match(/\d+/g).join('');
       $('#'+idButtonSave).addClass('btn-main').removeClass('btn-scd');
     });
     $('textarea').bind('input', function() {
-      idButtonSave = 'save' + $(this).attr("id").match(/\d+/g).join('');
+      idButtonSave = 'save-' + $(this).attr("id").match(/\d+/g).join('');
       $('#'+idButtonSave).addClass('btn-main').removeClass('btn-scd');
     });
     // Ajouter pour les champs de titres
@@ -127,6 +127,15 @@
         idButtonTrash = 0;
         idTable = 0;
       });
+    });
+  });
+</script>
+<script> // Script pour ajouter des exceptions
+  jQuery(function($) {
+    $('.addException').click(function(e){
+      e.preventDefault();
+      console.log('ee');
+
     });
   });
 </script>
