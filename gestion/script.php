@@ -2,11 +2,9 @@
   // Les scripts permettant à view.php d'être interactif
  ?>
 <script> // Script de mise à jour des tableaux
-  let queryNumber = 0;
   let jour = ['lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche'];
   jQuery(function($) {
     $('.saveTable').click(function(e){
-      queryNumber += 1;
       e.preventDefault();
       // On déclare nos variables
       let idButtonSave = $(this).attr("id");
@@ -14,7 +12,7 @@
       // On désactive le bouton pour éviter une surcharge de requête
       $('#'+idButtonSave).prop('disabled', true);
       // On traite les données
-      let dataMaj = '?msj=true&idTable='+idTable+'&title=' + $('#title-'+idTable).val() + '&queryNumber=' + queryNumber;
+      let dataMaj = '?msj=true&idTable='+idTable+'&title=' + $('#title-'+idTable).val();
       for (let i = 0; i <= 7; i++) {
         dataMaj += '&time-'+jour[i]+'-debut=' + $('#time-'+idTable+'-'+jour[i]+'-debut').val() + '&time-'+jour[i]+'-fin=' + $('#time-'+idTable+'-'+jour[i]+'-fin').val() +
         '&comment-'+jour[i]+'=' + $('#comment-'+idTable+'-'+jour[i]).val();
@@ -77,12 +75,21 @@
     });
   });
 </script>
+<script> // Script recharger la page
+  jQuery(function($) {
+    $('#mainSectionTableaux').on('click', '#rechargerPage', function(e) {
+      e.preventDefault();
+      location.reload();
+    });
+  });
+</script>
 <script> // Script pour supprimer des tableaux
   jQuery(function($) {
     // On initialise nos variables
     let idButtonTrash = 0;
     let idTable = 0;
-    $('.trash').click(function(e){
+
+    $('#mainSectionTableaux').on('click', '.trash', function(e) {
       e.preventDefault();
       // On met à jour nos variables
       idButtonTrash = $(this).attr("id");
