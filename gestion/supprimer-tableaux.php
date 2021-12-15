@@ -16,7 +16,6 @@
 
 
       echo "Tableau supprimé";
-      echo "\n".$idTab;
 
     } else {
       $error = "Le tableau à supprimer n'est pas précisé";
