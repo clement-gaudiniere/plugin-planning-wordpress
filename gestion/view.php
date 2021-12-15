@@ -103,5 +103,5 @@
   </div>
 </div>
 <div id="loadingWindow">
-  <div></div>
+  <div class="first"></div>
 </div>
