@@ -1,4 +1,5 @@
 <?php
+  require "../../../../../wp-config.php";
   global $wpdb;
 
   // On cherche les tableaux qui existent

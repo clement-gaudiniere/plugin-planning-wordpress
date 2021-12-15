@@ -21,7 +21,7 @@
       $('#loadingWindow > div:last').after('<div class="chargement" id="chargement'+idTable+'"><div class="components-load" id="componentsLoad'+idTable+'"><div class="lds-ripple"><div></div><div></div></div><span>Chargement...</span></div><div class="components-complete" id="componentsComplete'+idTable+'"><svg xmlns="http://www.w3.org/2000/svg" style="width: 50px; padding: 6px;" viewBox="0 0 48 48" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44ZM34.7415 17.6709C35.1121 17.2614 35.0805 16.629 34.6709 16.2585C34.2614 15.8879 33.629 15.9195 33.2585 16.3291L21.2809 29.5675L14.6905 23.2766C14.291 22.8953 13.658 22.91 13.2766 23.3095C12.8953 23.709 12.91 24.342 13.3095 24.7234L20.6429 31.7234L21.3858 32.4325L22.0749 31.6709L34.7415 17.6709Z" fill="#fff"/></svg><span>Succès !</span></div></div>');
       // On effectue la requête Ajax
       $.ajax({
-        url : '/Wordpress/wp-content/plugins/plan/gestion/modification-tableaux.php'+dataMaj,
+        url : '/Wordpress/wp-content/plugins/plan/gestion/scripts/modification-tableaux.php'+dataMaj,
         type : 'POST',
         dataType : 'html',
         success : function(code_html, statut){
@@ -64,7 +64,7 @@
       $('#ajouterPlanning').prop('disabled', true);
       let dataAddPlan = "?newTab=true";
       $.ajax({
-        url : '/Wordpress/wp-content/plugins/plan/gestion/nouveaux-tableaux.php'+dataAddPlan,
+        url : '/Wordpress/wp-content/plugins/plan/gestion/scripts/nouveaux-tableaux.php'+dataAddPlan,
         type : 'POST',
         dataType : 'html',
         success : function(code_html, statut){
@@ -72,14 +72,6 @@
           $('#ajouterPlanning').prop('disabled', false);
         }
       });
-    });
-  });
-</script>
-<script> // Script recharger la page
-  jQuery(function($) {
-    $('#mainSectionTableaux').on('click', '#rechargerPage', function(e) {
-      e.preventDefault();
-      location.reload();
     });
   });
 </script>
@@ -109,7 +101,7 @@
         $('#loadingWindow > .first').after('<div class="chargement" id="chargement'+idTable+'"><div class="components-load" id="componentsLoad'+idTable+'"><div class="lds-ripple"><div></div><div></div></div><span>Chargement...</span></div><div class="components-complete" id="componentsComplete'+idTable+'"><svg xmlns="http://www.w3.org/2000/svg" style="width: 50px; padding: 6px;" viewBox="0 0 48 48" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44ZM34.7415 17.6709C35.1121 17.2614 35.0805 16.629 34.6709 16.2585C34.2614 15.8879 33.629 15.9195 33.2585 16.3291L21.2809 29.5675L14.6905 23.2766C14.291 22.8953 13.658 22.91 13.2766 23.3095C12.8953 23.709 12.91 24.342 13.3095 24.7234L20.6429 31.7234L21.3858 32.4325L22.0749 31.6709L34.7415 17.6709Z" fill="#fff"/></svg><span>Succès !</span></div></div>');
         // On effectue la requête Ajax
         $.ajax({
-          url : '/Wordpress/wp-content/plugins/plan/gestion/supprimer-tableaux.php'+dataDeleteTab,
+          url : '/Wordpress/wp-content/plugins/plan/gestion/scripts/supprimer-tableaux.php'+dataDeleteTab,
           type : 'POST',
           dataType : 'html',
           success : function(code_html, statut){

@@ -90,7 +90,7 @@
 </section>
 
 <div id="scriptBox">
-  <?php include 'script.php'; ?>
+  <?php include plugin_dir_path(__FILE__) . '../scripts/script.php'; ?>
 </div>
 
 <div id="confirmDelete">

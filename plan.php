@@ -34,7 +34,7 @@ function modifMenu() {
     'Planning de la salle',
     'Planning',
     'manage_options',
-    plugin_dir_path(__FILE__) . 'gestion/view.php',
+    plugin_dir_path(__FILE__) . 'gestion/views/index.php',
     null,
     'dashicons-clock',
     40

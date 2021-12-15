@@ -1,5 +1,5 @@
 <?php
-  require "../../../../wp-config.php";
+  require "../../../../../wp-config.php";
   global $wpdb;
 
   // Fichier de mise à jour des valeurs des tableaux
