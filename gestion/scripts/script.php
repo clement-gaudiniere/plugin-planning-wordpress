@@ -49,11 +49,6 @@
       idButtonSave = 'save-' + $(this).attr("id").match(/\d+/g).join('');
       $('#'+idButtonSave).addClass('btn-main').removeClass('btn-scd');
     });
-    $('textarea').bind('input', function() {
-      idButtonSave = 'save-' + $(this).attr("id").match(/\d+/g).join('');
-      $('#'+idButtonSave).addClass('btn-main').removeClass('btn-scd');
-    });
-    // Ajouter pour les champs de titres
   });
 // Script pour ajouter des tabelaux
   jQuery(function($) {
@@ -129,6 +124,7 @@
   });
 // Script pour ajouter des exceptions
   jQuery(function($) {
+    // Si user souhaite ajouter une exception
     $('.addException').click(function(e){
       e.preventDefault();
       $('#ajouterExeception').css('display','block');
@@ -140,7 +136,24 @@
       e.preventDefault();
       $('#onePlanning').prop("checked", true);
     });
-
+    // Lorsque l'utilisateur enregistre l'exception
+    $('#enregistrerException').click(function(e){
+      e.preventDefault();
+      // if(('input[name=onePlanning]').is(':checked')){
+      //   console.log('onePlanning');
+      // }
+      // else if(('input[name=allPlanning]').is(':checked')) {
+      //   console.log('allPlanning');
+      // }
+      // let planningException =
+      let dateException = $('#dateException').val();
+      let timeException = $('#timeException').val();
+      let raisonException = $('#commentException').val();
+      alert('pas encore implémenté : )');
+      console.log(dateException);
+      console.log(timeException);
+      console.log(raisonException);
+    });
 
 
     // Lorsqu'on ferme la popup

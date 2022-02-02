@@ -120,7 +120,6 @@
           <?php
           foreach($planningTableaux as $planningTableauxIncrement) {
            ?>
-            <div class="part" id="part-<?= $planningTableauxIncrement->id ?>">
               <option value="tab-<?= $planningTableauxIncrement->id ?>"><?= $planningTableauxIncrement->name ?></option>
            <?php
           }
@@ -130,14 +129,16 @@
       </div>
       <div class="part">
         <label>Régler la date et l'heure :</label><br>
-        <input type="date" name="" value=""><input type="time" name="" value="">
+        <input type="date" name="dateException" id="dateException">
+        <input type="time" name="timeException" id="timeException">
       </div>
       <div class="part">
         <label>Raison :</label><br>
-        <textarea name="commentException" rows="8" cols="80" placeholder="Ecrivez la raison ici..."></textarea>
+        <textarea name="commentException" id="commentException" rows="8" cols="80" placeholder="Ecrivez la raison ici..."></textarea>
       </div>
-
-
+      <div class="part">
+        <input type="submit" name="Enregistrer" id="enregistrerException" class="btn btn-main">
+      </div>
     </form>
 
   </div>
