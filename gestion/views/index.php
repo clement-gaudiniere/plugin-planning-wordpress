@@ -20,7 +20,7 @@
     ?>
     <div class="part" id="part-<?= $planningTableauxIncrement->id ?>">
       <form method="post">
-        <input type="text" name="title-<?= $planningTableauxIncrement->id ?>" id="title-<?= $planningTableauxIncrement->id ?>" value="<?= $planningTableauxIncrement->name ?>" placeholder="Titre du tableau">
+        <input type="text" name="title-<?= $planningTableauxIncrement->id ?>" id="title-<?= $planningTableauxIncrement->id ?>" value="<?= $planningTableauxIncrement->name ?>" placeholder="Titre du tableau" class="inputSaving">
         <table class="table-plan">
           <tr>
             <th>Lundi</th>
@@ -38,9 +38,9 @@
             foreach($planningHoraires as $planningHorairesIncrement) {
               ?>
               <td>
-                <input type="time" id="time-<?= $planningTableauxIncrement->id ?>-<?= $joursSemaine[$i] ?>-debut" name="time-<?= $planningTableauxIncrement->id ?>-lundi-debut" value="<?= $planningHorairesIncrement->horaireDebut ?>">
+                <input type="time" id="time-<?= $planningTableauxIncrement->id ?>-<?= $joursSemaine[$i] ?>-debut" name="time-<?= $planningTableauxIncrement->id ?>-lundi-debut" value="<?= $planningHorairesIncrement->horaireDebut ?>" class="inputSaving">
                 <span>à</span>
-                <input type="time" id="time-<?= $planningTableauxIncrement->id ?>-<?= $joursSemaine[$i] ?>-fin" name="time-<?= $planningTableauxIncrement->id ?>-lundi-fin" value="<?= $planningHorairesIncrement->horaireFin ?>">
+                <input type="time" id="time-<?= $planningTableauxIncrement->id ?>-<?= $joursSemaine[$i] ?>-fin" name="time-<?= $planningTableauxIncrement->id ?>-lundi-fin" value="<?= $planningHorairesIncrement->horaireFin ?>" class="inputSaving">
               </td>
               <?php
               $i += 1;
@@ -52,7 +52,7 @@
             $i = 0;
             foreach($planningHoraires as $planningHorairesIncrement) {
               ?>
-              <td class="comment"><textarea maxlength="150" placeholder="Commentaire..." id="comment-<?= $planningTableauxIncrement->id ?>-<?= $joursSemaine[$i] ?>"><?= $planningHorairesIncrement->commentaire ?></textarea></td>
+              <td class="comment"><textarea maxlength="150" placeholder="Commentaire..." id="comment-<?= $planningTableauxIncrement->id ?>-<?= $joursSemaine[$i] ?>" class="inputSaving"><?= $planningHorairesIncrement->commentaire ?></textarea></td>
               <?php
               $i += 1;
             }
@@ -104,8 +104,43 @@
   </div>
 </div>
 
-<div id="popupPlan">
+<div id="ajouterExeception" class="popupPlan">
+  <div id="closePopupExeception">
+    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 490 490" style="enable-background:new 0 0 490 490;" xml:space="preserve">
+      <polygon points="11.387,490 245,255.832 478.613,490 489.439,479.174 255.809,244.996 489.439,10.811 478.613,0 245,234.161   11.387,0 0.561,10.811 234.191,244.996 0.561,479.174 "/>
+    </svg>
+  </div>
+  <div class="content">
+    <form method="post">
+      <div class="part">
+        <label>Ajouter une exception :</label><br>
+        <input type="radio" name="exceptionFor" value="onePlanning" id="onePlanning"><label for="onePlanning">Pour un planning :</label>
+        <select name="planning" id="planningChoice">
+          <option value="none" selected>---</option>
+          <?php
+          foreach($planningTableaux as $planningTableauxIncrement) {
+           ?>
+            <div class="part" id="part-<?= $planningTableauxIncrement->id ?>">
+              <option value="tab-<?= $planningTableauxIncrement->id ?>"><?= $planningTableauxIncrement->name ?></option>
+           <?php
+          }
+           ?>
+        </select><br>
+        <input type="radio" name="exceptionFor" value="allPlanning" id="allPlanning"><label for="allPlanning">Pour tous les tableaux</label>
+      </div>
+      <div class="part">
+        <label>Régler la date et l'heure :</label><br>
+        <input type="date" name="" value=""><input type="time" name="" value="">
+      </div>
+      <div class="part">
+        <label>Raison :</label><br>
+        <textarea name="commentException" rows="8" cols="80" placeholder="Ecrivez la raison ici..."></textarea>
+      </div>
 
+
+    </form>
+
+  </div>
 </div>
 
 <div id="loadingWindow">

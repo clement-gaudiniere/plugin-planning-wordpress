@@ -42,6 +42,6 @@ function modifMenu() {
 }
 
 function say_hello(){
-  echo('<p>Heelow World !</p>');
+  // echo('<p>Heelow World !</p>');
 }
 ?>

@@ -230,14 +230,16 @@ $border-radius: 6px;
 }
 
 // Popup quelconque
-#popupPlan{
-  background: white;
+.popupPlan{
+  background: #fff;
   width: 100%;
   height: 100%;
-  position: fixed;
+  position: absolute;
+  padding: 7rem 5rem;
   top: 0;
   left: 0;
   display: none;
+  font-size: 1.0rem;
 }
 
 // Loader chargement
@@ -309,6 +311,45 @@ $border-radius: 6px;
     width: 40px;
     height: 40px;
     opacity: 0;
+  }
+}
+
+// Popup Plann
+#ajouterExeception{
+  #closePopupExeception{
+    width: 4rem;
+    position: fixed;
+    top: 3rem;
+    right: 1.5rem;
+    display: block;
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 1rem 1rem 0.7rem 1rem;
+    &:hover{
+      background: #f1f1f1;
+    }
+  }
+  .content{
+    form{
+      label {
+        cursor: pointer;
+        display: inline-block;
+        margin: 7px 0;
+        user-select: none;
+      }
+      input[type=radio]{
+        margin: 0 .5rem 0 0;
+      }
+      input[type=date]{
+        margin: 0 1rem 0 0;
+      }
+    }
+    .part{
+      margin: 0 0 3rem 0;
+    }
+  }
+  #onePlanning{
+    margin: 0 1rem 0 0;
   }
 }
 
