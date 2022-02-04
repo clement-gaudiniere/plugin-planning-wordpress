@@ -112,7 +112,7 @@
   </div>
   <div class="content">
     <form method="post">
-      <div class="part">
+      <div class="part" id="part1">
         <label>Ajouter une exception :</label><br>
         <input type="radio" name="exceptionFor" value="onePlanning" id="onePlanning"><label for="onePlanning">Pour un planning :</label>
         <select name="planning" id="planningChoice">
@@ -129,12 +129,12 @@
       </div>
       <div class="part">
         <label>Régler la date et l'heure :</label><br>
-        <input type="date" name="dateException" id="dateException">
-        <input type="time" name="timeException" id="timeException">
+        <input type="date" name="dateException" id="dateException" required>
+        <input type="time" name="timeException" id="timeException" required>
       </div>
       <div class="part">
         <label>Raison :</label><br>
-        <textarea name="commentException" id="commentException" rows="8" cols="80" placeholder="Ecrivez la raison ici..."></textarea>
+        <textarea name="commentException" id="commentException" rows="8" cols="80" placeholder="Ecrivez la raison ici..." required></textarea>
       </div>
       <div class="part">
         <input type="submit" name="Enregistrer" id="enregistrerException" class="btn btn-main">

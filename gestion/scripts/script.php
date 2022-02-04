@@ -139,20 +139,56 @@
     // Lorsque l'utilisateur enregistre l'exception
     $('#enregistrerException').click(function(e){
       e.preventDefault();
-      // if(('input[name=onePlanning]').is(':checked')){
-      //   console.log('onePlanning');
-      // }
-      // else if(('input[name=allPlanning]').is(':checked')) {
-      //   console.log('allPlanning');
-      // }
-      // let planningException =
-      let dateException = $('#dateException').val();
-      let timeException = $('#timeException').val();
-      let raisonException = $('#commentException').val();
-      alert('pas encore implémenté : )');
-      console.log(dateException);
-      console.log(timeException);
-      console.log(raisonException);
+      let toutEstComplete = true;
+      let planningExceptionFor = "";
+      let choicePlanning = "none";
+      // On vérifie quel radio est coché
+      if($('#onePlanning').is(':checked')){
+        choicePlanning = $('#planningChoice').children("option:selected").val();
+        $('#ajouterExeception .content #part1').removeClass('required');
+        if(choicePlanning == 'none'){
+          toutEstComplete = false;
+          $('#ajouterExeception .content #part1').addClass('required');
+        }
+        planningExceptionFor = "onePlanning";
+      } else if($('#allPlanning').is(':checked')){
+        planningExceptionFor = "allPlanning";
+        $('#ajouterExeception .content .part').removeClass('required');
+      } else {
+        toutEstComplete = false;
+        $('#ajouterExeception .content #part1').addClass('required');
+      }
+      // On vérifie que les autres champs sont remplis
+      if(!$("#dateException").val()){
+        toutEstComplete = false;
+        $('#dateException').addClass('required');
+      } else {
+        $('#dateException').removeClass('required');
+      }
+      if(!$("#timeException").val()){
+        toutEstComplete = false;
+        $('#timeException').addClass('required');
+      } else {
+        $('#timeException').removeClass('required');
+      }
+      if(!$("#commentException").val()){
+        toutEstComplete = false;
+        $('#commentException').addClass('required');
+      } else {
+        $('#commentException').removeClass('required');
+      }
+      // Si tout est complété
+      if(toutEstComplete == true){
+        let dataAjouterException = '?planningExceptionFor='+planningExceptionFor+'&choicePlanning='+choicePlanning+'&dateException='+$("#dateException").val()+'&timeException='+$("#timeException").val()+'&commentException='+$("#commentException").val();
+        $.ajax({
+          url : '/Site-BCA72/wp-content/plugins/plan/gestion/scripts/ajouter-exception.php'+dataAjouterException,
+          type : 'POST',
+          dataType : 'html',
+          success : function(code_html, statut){
+            console.log(code_html);
+          }
+        });
+      }
     });
 
 
