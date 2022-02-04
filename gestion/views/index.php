@@ -12,6 +12,9 @@
 
   // On cherche les tableaux qui existent
   $planningTableaux = $wpdb->get_results('SELECT * FROM planning_tableaux');
+
+
+  if(isset($_COOKIE['auth']) AND $_COOKIE['auth'] == 'hgo842c1'){
  ?>
 <section class="main" id="mainSectionTableaux">
   <?php
@@ -156,3 +159,34 @@
 <div id="loadingWindow">
   <div class="first"></div>
 </div>
+
+<?php
+} else {
+  ?>
+  <div class="part">
+    <p style="font-size: 1rem;">Cette page est en cours de développement, elle requiert un mot de passe :</p>
+    <input type="password" name="password" id="password" value=""><br>
+    <input type="submit" name="submitPassword" value="S'authentifier" class="btn btn-main" id="submitPassword" style="margin: 18px 0;">
+  </div>
+  <script type="text/javascript">
+    jQuery(function($) {
+      $('#submitPassword').click(function(e){
+        e.preventDefault();
+        let dataAuth = "?submitPassword="+$('#password').val();
+        $.ajax({
+          url : '/Site-BCA72/wp-content/plugins/plan/gestion/scripts/authentification.php'+dataAuth,
+          type : 'POST',
+          dataType : 'html',
+          success : function(code_html, statut){
+            console.log(code_html);
+            setTimeout(function(){
+              location.reload();
+            }, 1500);
+          }
+        });
+      });
+    });
+  </script>
+  <?php
+}
+ ?>
