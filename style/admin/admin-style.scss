@@ -21,6 +21,7 @@ $border-radius: 6px;
   box-sizing: border-box;
 }
 
+
 // Pour ajouter un mixin dans une css property : @include flex();
 @mixin flex($flex-direction: row, $flex-wrap: nowrap, $align-content: center, $justify-content: space-around, $align-items: center){
   display: flex;
@@ -33,6 +34,11 @@ $border-radius: 6px;
 
 .main{
   font-size: 1rem;
+  // Bannière des boutons en bas de la page
+  #banniere{
+    @include flex(row, nowrap, center, center, center);
+    padding: 50px 0 10px 0;
+  }
 }
 
 .part{
@@ -112,7 +118,7 @@ $border-radius: 6px;
     border: 1px solid white;
     color: black;
     &:hover{
-      background: lighten($secondColor, 5%);
+      background: lighten($secondColor, 3%);
     }
   }
   &-danger {
@@ -176,23 +182,38 @@ $border-radius: 6px;
   cursor: not-allowed;
 }
 
-// Bouton pour ajouter un planning
-#ajouterPlanning{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-content: center;
-  justify-content: center;
-  align-items: center;
-  margin: 50px auto;
+// Bouton pour ajouter un planning/exception
+#ajouterPlanning, #addExceptionGeneral{
+  @include flex(row, nowrap, center, center, center);
   padding: 12px 15px;
-  background: $mainColor;
-  color: $contrastColor;
   width: fit-content;
-  border: 1px solid $contrastColor;
+  margin: 0 8px;
   svg{
     margin: 0 15px 0 0;
     fill: $contrastColor;
+  }
+}
+#ajouterPlanning{
+  svg{
+    margin: 0 15px 0 0;
+    fill: $contrastColor;
+  }
+}
+#addExceptionGeneral{
+  svg{
+    margin: 0 15px 0 0;
+    fill: black;
+  }
+}
+
+// Bouton pour ajouter une exception
+#addExceptionGeneral{
+  @include flex(row, nowrap, center, center, center);
+  padding: 12px 15px;
+  width: fit-content;
+  svg{
+    margin: 0 15px 0 0;
+    fill: black;
   }
 }
 

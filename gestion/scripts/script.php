@@ -127,6 +127,16 @@
     // Si user souhaite ajouter une exception
     $('.addException').click(function(e){
       e.preventDefault();
+      // On remonte en haut de la page
+      $('html, body').animate({scrollTop: '0px'}, 250);
+      $addExceptionTab = $(this).attr('id').substr(0,15);
+      // Si l'user choisit un bouton d'un tableau en particulier
+      if($addExceptionTab == "addExceptionTab"){
+        // On trouve l'id du tableau, on check le radio, puis on séléctionne la valeur du tableau correspondant
+        let tabIdButton = $(this).attr('id').substr(16);
+        $('#onePlanning').prop("checked", true);
+        $('#planningChoice').val('tab-'+tabIdButton);
+      }
       $('#ajouterExeception').css('display','block');
       // On change le background
       $('body').css('background','#fff');
@@ -185,13 +195,20 @@
           type : 'POST',
           dataType : 'html',
           success : function(code_html, statut){
-            console.log(code_html);
+            if(code_html == "exception-ajoute"){
+              // On (re)change le background
+              $('body').css('background','#f0f0f1');
+              // On enlève la popup
+              $('#ajouterExeception').css('display','none');
+              // On reset les champs
+              $('#ajouterExceptionForm')[0].reset();
+            } else {
+              console.log(code_html);
+            }
           }
         });
       }
     });
-
-
     // Lorsqu'on ferme la popup
     $('#closePopupExeception').click(function(e){
       e.preventDefault();
@@ -199,6 +216,8 @@
       $('body').css('background','#f0f0f1');
       // On affiche la popup
       $('#ajouterExeception').css('display','none');
+      // On reset les champs
+      $('#ajouterExceptionForm')[0].reset();
     });
   });
 </script>

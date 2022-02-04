@@ -65,7 +65,7 @@
           		<path d="M381.575,57.067h-90.231C288.404,25.111,261.461,0,228.752,0C196.043,0,169.1,25.111,166.16,57.067H75.929    c-26.667,0-48.362,21.695-48.362,48.362c0,26.018,20.655,47.292,46.427,48.313v246.694c0,31.467,25.6,57.067,57.067,57.067    h195.381c31.467,0,57.067-25.6,57.067-57.067V153.741c25.772-1.02,46.427-22.294,46.427-48.313    C429.936,78.761,408.242,57.067,381.575,57.067z M165.841,376.817c0,8.013-6.496,14.509-14.508,14.509    c-8.013,0-14.508-6.496-14.508-14.509V186.113c0-8.013,6.496-14.508,14.508-14.508c8.013,0,14.508,6.496,14.508,14.508V376.817z     M243.26,376.817c0,8.013-6.496,14.509-14.508,14.509c-8.013,0-14.508-6.496-14.508-14.509V186.113    c0-8.013,6.496-14.508,14.508-14.508c8.013,0,14.508,6.496,14.508,14.508V376.817z M320.679,376.817    c0,8.013-6.496,14.509-14.508,14.509c-8.013,0-14.509-6.496-14.509-14.509V186.113c0-8.013,6.496-14.508,14.509-14.508    s14.508,6.496,14.508,14.508V376.817z"/>
           	</g>
           </svg>
-          <button type="button" name="addException-<?= $planningTableauxIncrement->id ?>" class="btn btn-scd addException" id="addException-<?= $planningTableauxIncrement->id ?>">Ajouter une exception</button>
+          <button type="button" name="addExceptionTab-<?= $planningTableauxIncrement->id ?>" class="btn btn-scd addException" id="addExceptionTab-<?= $planningTableauxIncrement->id ?>">Ajouter une exception</button>
           <button type="button" name="save" class="btn btn-scd saveTable" id="save-<?= $planningTableauxIncrement->id ?>">Enregistrer</button>
         </div>
       </form>
@@ -76,7 +76,7 @@
 
  <div class="part nextTable"></div>
 
-  <div class="part">
+  <div class="part" id="banniere">
     <button id="ajouterPlanning" class="btn btn-main">
       <svg xmlns="http://www.w3.org/2000/svg" width="25px" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 489.8 489.8" style="enable-background:new 0 0 489.8 489.8;" xml:space="preserve">
       	<g>
@@ -85,6 +85,15 @@
       	</g>
       </svg>
       Ajouter un planning horaires
+    </button>
+    <button id="addExceptionGeneral" class="btn btn-scd addException">
+      <svg xmlns="http://www.w3.org/2000/svg" width="25px" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 489.8 489.8" style="enable-background:new 0 0 489.8 489.8;" xml:space="preserve">
+      	<g>
+      		<path d="M438.2,0H51.6C23.1,0,0,23.2,0,51.6v386.6c0,28.5,23.2,51.6,51.6,51.6h386.6c28.5,0,51.6-23.2,51.6-51.6V51.6    C489.8,23.2,466.6,0,438.2,0z M465.3,438.2c0,14.9-12.2,27.1-27.1,27.1H51.6c-14.9,0-27.1-12.2-27.1-27.1V51.6    c0-14.9,12.2-27.1,27.1-27.1h386.6c14.9,0,27.1,12.2,27.1,27.1V438.2z"/>
+      		<path d="M337.4,232.7h-80.3v-80.3c0-6.8-5.5-12.3-12.3-12.3s-12.3,5.5-12.3,12.3v80.3h-80.3c-6.8,0-12.3,5.5-12.3,12.2    c0,6.8,5.5,12.3,12.3,12.3h80.3v80.3c0,6.8,5.5,12.3,12.3,12.3s12.3-5.5,12.3-12.3v-80.3h80.3c6.8,0,12.3-5.5,12.3-12.3    C349.7,238.1,344.2,232.7,337.4,232.7z"/>
+      	</g>
+      </svg>
+      Ajouter une exception
     </button>
   </div>
 </section>
@@ -111,7 +120,7 @@
     </svg>
   </div>
   <div class="content">
-    <form method="post">
+    <form method="post" id="ajouterExceptionForm">
       <div class="part" id="part1">
         <label>Ajouter une exception :</label><br>
         <input type="radio" name="exceptionFor" value="onePlanning" id="onePlanning"><label for="onePlanning">Pour un planning :</label>

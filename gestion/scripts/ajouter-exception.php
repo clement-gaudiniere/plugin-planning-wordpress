@@ -1,7 +1,4 @@
 <?php
-ini_set('display_startup_errors', 1);
-ini_set('display_errors', 1);
-error_reporting(-1);
   require "../../../../../wp-config.php";
   global $wpdb;
 
@@ -21,27 +18,18 @@ error_reporting(-1);
 
         $planningId = intval(substr($choicePlanning, 4));
 
-        $addException = $wpdb->query('INSERT INTO `planning_exceptions`(`tabId`, `dateException`, `timeException`, `raison`) VALUES ('.$planningId.','.$dateException.','.$timeException.','.$commentException.')');
+        $addException = $wpdb->query('INSERT INTO `planning_exceptions`(`tabId`, `dateException`, `timeException`, `raison`) VALUES ("'.$planningId.'","'.$dateException.'","'.$timeException.'","'.$commentException.'")');
 
-        echo "Success 1";
-        echo $planningId;
-        echo $dateException;
-        echo $timeException;
-        echo $commentException;
-
+        echo "exception-ajoute";
 
       } elseif ($planningExceptionFor == 'allPlanning') {
 
-        $addException = $wpdb->query('INSERT INTO `planning_exceptions`(`tabId`, `dateException`, `timeException`, `raison`) VALUES ("all",'.$dateException.','.$timeException.','.$commentException.')');
+        $addException = $wpdb->query('INSERT INTO `planning_exceptions`(`tabId`, `dateException`, `timeException`, `raison`) VALUES (0,"'.$dateException.'","'.$timeException.'","'.$commentException.'")');
 
-        echo "Success 2";
+        echo "exception-ajoute";
 
       }
-
-
     }
   }
-
-  echo "     //";
 
  ?>
