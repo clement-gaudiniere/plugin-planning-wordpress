@@ -12,6 +12,7 @@
 // Variables
 $mainColor: #2271b1;
 $secondColor: #a1a1a1;
+$thirdColor: #03c536; // Vert
 $contrastColor: white;
 $tabelauBorderSize: 2px;
 $border-radius: 6px;
@@ -34,10 +35,25 @@ $border-radius: 6px;
 
 .main{
   font-size: 1rem;
-  // Bannière des boutons en bas de la page
-  #banniere{
+  .banniere{
     @include flex(row, nowrap, center, center, center);
     padding: 50px 0 10px 0;
+    &-title{
+      margin: 0 0 1rem 0;
+    }
+    #planningIcon{
+      width: 3rem;
+      fill: #4f4f4f;
+    }
+    h1{
+      margin: 0;
+      background: -webkit-linear-gradient(350deg, $mainColor, $thirdColor);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      font-size: 2.5rem;
+      padding: 2rem;
+    }
   }
 }
 

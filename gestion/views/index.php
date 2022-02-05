@@ -17,6 +17,12 @@
   if(isset($_COOKIE['auth']) AND $_COOKIE['auth'] == 'hgo842c1'){
  ?>
 <section class="main" id="mainSectionTableaux">
+  <div class="banniere banniere-title">
+    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 295 295" style="enable-background:new 0 0 295 295;" xml:space="preserve" id="planningIcon">
+      <path d="M287.5,43.729h-45.002V16.224c0-4.143-3.357-7.5-7.5-7.5c-4.143,0-7.5,3.357-7.5,7.5v27.505H67.502V16.224  c0-4.143-3.358-7.5-7.5-7.5c-4.143,0-7.5,3.357-7.5,7.5v27.505H7.5c-4.143,0-7.5,3.357-7.5,7.5v227.547c0,4.142,3.357,7.5,7.5,7.5  h280c4.143,0,7.5-3.358,7.5-7.5V51.229C295,47.086,291.643,43.729,287.5,43.729z M167.999,130.335v35.921h-40.998v-35.921H167.999z   M280,166.255h-41.002v-35.921H280V166.255z M223.998,166.255h-40.999v-35.921h40.999V166.255z M127.001,181.255h40.998v35.916  h-40.998V181.255z M127.001,232.171h40.998v39.105h-40.998V232.171z M182.999,232.171h40.999v39.105h-40.999V232.171z   M182.999,217.171v-35.916h40.999v35.916H182.999z M238.998,181.255H280v35.916h-41.002V181.255z M52.502,58.729v27.509  c0,4.143,3.357,7.5,7.5,7.5c4.142,0,7.5-3.357,7.5-7.5V58.729h159.996v27.509c0,4.143,3.357,7.5,7.5,7.5c4.143,0,7.5-3.357,7.5-7.5  V58.729H280v56.606H15V58.729H52.502z M15,130.335h97.001v140.941H15V130.335z M238.998,271.276v-39.105H280v39.105H238.998z"/>
+    </svg>
+    <h1 class="titlePlanning">Gestion des plannings</h1>
+  </div>
   <?php
   // On affiche chaque tableaux avec ses horaires
   foreach($planningTableaux as $planningTableauxIncrement) {
@@ -79,7 +85,7 @@
 
  <div class="part nextTable"></div>
 
-  <div class="part" id="banniere">
+  <div class="part banniere">
     <button id="ajouterPlanning" class="btn btn-main">
       <svg xmlns="http://www.w3.org/2000/svg" width="25px" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 489.8 489.8" style="enable-background:new 0 0 489.8 489.8;" xml:space="preserve">
       	<g>
