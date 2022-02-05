@@ -5,6 +5,7 @@
     AINSI POUR UN INPUT DE TYPE "time" DU TABLEAU 1 DE LA COLONNE DU LUNDI QUI MARQUE LE DEBUT DE L'HORAIRE :
       time-1-lundi-debut
   */
+  require "../wp-config.php";
   global $wpdb;
 
   // On créer une liste des jours de la semaine
@@ -169,30 +170,11 @@
 <?php
 } else {
   ?>
-  <div class="part">
+  <form class="part" action="/Site-BCA72/wp-content/plugins/plan/gestion/scripts/authentification.php">
     <p style="font-size: 1rem;">Cette page est en cours de développement, elle requiert un mot de passe :</p>
     <input type="password" name="password" id="password" value=""><br>
     <input type="submit" name="submitPassword" value="S'authentifier" class="btn btn-main" id="submitPassword" style="margin: 18px 0;">
-  </div>
-  <script type="text/javascript">
-    jQuery(function($) {
-      $('#submitPassword').click(function(e){
-        e.preventDefault();
-        let dataAuth = "?submitPassword="+$('#password').val();
-        $.ajax({
-          url : '/Site-BCA72/wp-content/plugins/plan/gestion/scripts/authentification.php'+dataAuth,
-          type : 'POST',
-          dataType : 'html',
-          success : function(code_html, statut){
-            console.log(code_html);
-            setTimeout(function(){
-              location.reload();
-            }, 1500);
-          }
-        });
-      });
-    });
-  </script>
+  </form>
   <?php
 }
  ?>
